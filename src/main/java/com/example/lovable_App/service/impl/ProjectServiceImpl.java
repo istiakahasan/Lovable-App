@@ -5,6 +5,7 @@ import com.example.lovable_App.dto.project.ProjectResponse;
 import com.example.lovable_App.dto.project.ProjectSummaryResponse;
 import com.example.lovable_App.entity.Project;
 import com.example.lovable_App.entity.User;
+import com.example.lovable_App.error.ResourceNotFoundException;
 import com.example.lovable_App.mapper.ProjectMapper;
 import com.example.lovable_App.repository.ProjectRepository;
 import com.example.lovable_App.repository.UserRepository;
@@ -88,8 +89,8 @@ public class ProjectServiceImpl implements ProjectService {
     projectRepository.save(project);
     }
 
-    //INTERNAL FUNCTION
+    /// INTERNAL FUNCTION
     public Project getAccessibleProjectById(Long projectId,Long userId){
-        return projectRepository.findAccessibleProjectById(projectId,userId).orElseThrow();
+        return projectRepository.findAccessibleProjectById(projectId,userId).orElseThrow(()->new ResourceNotFoundException("project",projectId));
     }
 }
