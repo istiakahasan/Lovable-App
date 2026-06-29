@@ -1,5 +1,6 @@
 package com.example.lovable_App.error;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
@@ -9,6 +10,7 @@ import java.util.List;
 public record ApiError (HttpStatus status,
                         String message,
                         Instant  timestamp,
+                        @JsonInclude(JsonInclude.Include.NON_NULL)
                         List<ApiFieldError> errors) {
 
     public ApiError(HttpStatus status, String message) {
