@@ -20,7 +20,7 @@ public class User {
     long id;
 
      String email;
-    String passwordHash;
+     String passwordHash;
      String name;
 
       String avatarUrl;

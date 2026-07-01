@@ -29,9 +29,9 @@ public class Project {
     @Column(nullable = false)
     String name;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id",nullable = false)//owning site
-    User owner;
+//    @ManyToOne
+//    @JoinColumn(name = "owner_id",nullable = false)//owning site
+//    User owner;
 
     Boolean isPublic=false;
 
