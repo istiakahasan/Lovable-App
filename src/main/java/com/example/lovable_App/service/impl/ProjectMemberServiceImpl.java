@@ -19,7 +19,6 @@ import lombok.experimental.FieldDefaults;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -66,7 +65,7 @@ public class ProjectMemberServiceImpl implements ProjectMemberService {
     Project project=getAccessibleProjectById(projectId,userId);
 
 
-    User invitee=userRepository.findByEmail(request.email()).orElseThrow();
+    User invitee=userRepository.findByUsername(request.username()).orElseThrow();
     if(Objects.equals(invitee.getId(), userId)){
         throw  new RuntimeException("Can not invite yourself");
     }
