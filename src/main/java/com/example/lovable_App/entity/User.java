@@ -32,9 +32,9 @@ public class User implements UserDetails {
 
 
       @CreationTimestamp
-     Instant createdAt;
+      Instant createdAt;
       @UpdateTimestamp
-    Instant updatedAt;
+      Instant updatedAt;
     
      Instant deletedAt;//soft delete
     @Override

@@ -22,7 +22,6 @@ server:
   port: 8086
 
 
-
 jwt:
   secret-key: ${JWT_SECRET_KEY}
 
