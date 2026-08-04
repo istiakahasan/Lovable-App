@@ -34,7 +34,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     //Authorization= Bearer sdsd5f4sdf4sd4fsdf4s5
     String token=requestHeaderToken.split("Bearer ")[1];
 
-        JwtUserPrinciple user=authUtil.verifyAccessToken(token);
+        JwtUserPrinciple user=authUtil.verifyAccessToken(token);//we authenticated the user
         // This is authentication
         if (user!=null && SecurityContextHolder.getContext().getAuthentication()==null) {
             UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken

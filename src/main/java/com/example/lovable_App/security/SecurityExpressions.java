@@ -14,7 +14,7 @@ public class SecurityExpressions {
     private final AuthUtil authUtil;
 
     private boolean hasPermission(Long projectId, ProjectPermission projectPermission) {
-        Long  userId=authUtil.getCurrentUserId();
+        Long userId=authUtil.getCurrentUserId();
         return projectMemberRepository.findRoleByProjectIdAndUserId(projectId,userId)
                 .map(role->role.getPermissions().contains(projectPermission)).orElse(false);
     }

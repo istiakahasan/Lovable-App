@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Getter
-public  enum ProjectPermission {
+public enum ProjectPermission {
 
 
     VIEW("project:view"),
