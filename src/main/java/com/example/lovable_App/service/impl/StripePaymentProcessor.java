@@ -12,6 +12,7 @@ import com.stripe.model.checkout.Session;
 
 import com.stripe.param.checkout.SessionCreateParams;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,19 +21,25 @@ public class StripePaymentProcessor implements PaymentProcessor {
     private final AuthUtil authUtil;
     private final PlanRepository planRepository;
 
+    @Value("${client.url}")
+    private String frontendUrl;
+
     @Override
     public CheckoutResponse createCheckoutSessionUrl(CheckoutRequest request) {
         Plan plan=planRepository.findById(request.planId())
                 .orElseThrow(()-> new ResourceNotFoundException("Plan",request.planId()));
-    Long userId=authUtil.getCurrentUserId();
+        Long userId=authUtil.getCurrentUserId();
 
         SessionCreateParams params = SessionCreateParams.builder()
                 .addLineItem(
-                        SessionCreateParams.LineItem.builder().setPrice(prices.getData().get(0).getId()).setQuantity(1L).build())
+                        SessionCreateParams.LineItem.builder().setPrice(plan.getStripePriceId()).setQuantity(1L).build())
                 .setMode(SessionCreateParams.Mode.SUBSCRIPTION)
-                .setSuccessUrl(YOUR_DOMAIN + "/success.html?session_id={CHECKOUT_SESSION_ID}")
+                .setSuccessUrl(frontendUrl + "/success.html?session_id={CHECKOUT_SESSION_ID}")
+                .setCancelUrl(frontendUrl + "/cancel.html")
+                .putMetadata("user_id",userId.toString())
+                .putMetadata("plan_id",plan.getId().toString())
                 .build();
-        Session session = client.v1().checkout().sessions().create(params);
+        Session session = Session.create(params);
 
 
         return null;
