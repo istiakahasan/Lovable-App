@@ -10,19 +10,26 @@ import com.example.lovable_App.repository.PlanRepository;
 import com.example.lovable_App.repository.UserRepository;
 import com.example.lovable_App.security.AuthUtil;
 import com.example.lovable_App.service.PaymentProcessor;
+import com.example.lovable_App.service.SubscriptionService;
 import com.stripe.exception.StripeException;
+import com.stripe.model.StripeObject;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.checkout.SessionCreateParams;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class StripePaymentProcessor implements PaymentProcessor {
     private final AuthUtil authUtil;
     private final PlanRepository planRepository;
     private final UserRepository userRepository;
+    private final SubscriptionService subscriptionService;
 
     @Value("${client.url}")
     private String frontendUrl;
@@ -71,5 +78,12 @@ public class StripePaymentProcessor implements PaymentProcessor {
     @Override
     public PortalResponse openCustomerPortal(Long userId) {
         return null;
+    }
+
+
+    //**crucial event**
+    @Override
+    public void handleWebhookEvent(String type, StripeObject stripeObject, Map<String, String> metadata) {
+    log.info("type");
     }
 }
