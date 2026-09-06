@@ -57,7 +57,7 @@ private final PaymentProcessor paymentProcessor;
     }
 
 
-    @PostMapping("/webHooks/payments")
+    @PostMapping("/webhooks/payment")
     public ResponseEntity<String> handlePaymentWebhook(@RequestBody String payload, @RequestHeader("Stripe-Signature") String sigHeader){
 
         try {

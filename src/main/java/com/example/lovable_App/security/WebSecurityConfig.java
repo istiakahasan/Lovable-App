@@ -23,7 +23,7 @@ public class WebSecurityConfig {
 
         httpSecurity.csrf(csrfConfig->csrfConfig.disable())
                 .sessionManagement(sessionConfig->sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(auth->auth.requestMatchers("/api/**").permitAll()
+                .authorizeHttpRequests(auth->auth.requestMatchers("/api/**","/webhooks/**").permitAll()
                         ).addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
     }
