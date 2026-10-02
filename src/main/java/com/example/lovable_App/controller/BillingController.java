@@ -41,7 +41,7 @@ private final PaymentProcessor paymentProcessor;
     @GetMapping("/api/me/subscription")
     public ResponseEntity<SubscriptionResponse> getMySubscription(){
         Long usedId=1L;
-        return ResponseEntity.ok(subscriptionService.getCurrentsubscription(usedId));
+        return ResponseEntity.ok(subscriptionService.getCurrentsubscription());
     }
 
     @PostMapping("/api/payments/checkout")

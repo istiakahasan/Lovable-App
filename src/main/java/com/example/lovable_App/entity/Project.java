@@ -33,6 +33,7 @@ public class Project {
 //    @JoinColumn(name = "owner_id",nullable = false)//owning site
 //    User owner;
 
+
     Boolean isPublic=false;
 
     @CreationTimestamp
