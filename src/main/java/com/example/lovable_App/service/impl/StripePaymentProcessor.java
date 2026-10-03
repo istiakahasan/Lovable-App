@@ -132,6 +132,8 @@ public class StripePaymentProcessor implements PaymentProcessor {
         if(subscription == null){
             log.error("Subscription object was null");
             return;
+
+
         }
         SubscriptionStatus status= mapSrtipeStatusToEnum(subscription.getStatus());
         if(status == null){
